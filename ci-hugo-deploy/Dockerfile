@@ -10,7 +10,7 @@ RUN pip install Pygments==2.1.3
 RUN go get -v github.com/bep/s3tlsproxy/clients/s3pdeploy
 RUN wget ${HUGO_DOWNLOAD_URL} && \
 	 	tar -xf hugo_${HUGO_VERSION}_Linux-64bit.tar.gz -C /usr/bin/ hugo && \
-		rm -r hugo_${HUGO_VERSION}_Linux-64bit.tar.gz
+		rm hugo_${HUGO_VERSION}_Linux-64bit.tar.gz
 
 CMD ["hugo", "env"]
 
