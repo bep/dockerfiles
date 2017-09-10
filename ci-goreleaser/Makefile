@@ -4,6 +4,9 @@ repo=ci-goreleaser
 
 version ?= latest
 
+latest:
+	docker build -t ${user}/${repo}:latest .
+
 build:
 	docker build -t ${user}/${repo}:${version} -t ${user}/${repo}:latest .
 
