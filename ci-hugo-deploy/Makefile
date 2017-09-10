@@ -2,10 +2,12 @@
 user=bepsays
 repo=ci-hugo-deploy
 
+version ?= latest
+
 build:
-	docker build -t ${repo} .
+	docker build -t ${user}/${repo}:${version} -t ${user}/${repo}:latest .
 
 install: build
-	docker tag ${repo}:latest ${user}/${repo}
-	docker push ${user}/${repo}
+	docker push ${user}/${repo}:${version}
+	docker push ${user}/${repo}:latest
 
