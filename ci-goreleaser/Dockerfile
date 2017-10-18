@@ -8,8 +8,8 @@ ENV GORELEASER_SHA=013b6289cff41b8afca638007a727170efc8d61469405e2a5d30edf1343e5
 ENV GORELEASER_DOWNLOAD_FILE=goreleaser_Linux_x86_64.tar.gz
 ENV GORELEASER_DOWNLOAD_URL=https://github.com/goreleaser/goreleaser/releases/download/v${GORELEASER_VERSION}/${GORELEASER_DOWNLOAD_FILE}
 
-ENV MAGE_VERSION=1.0.1
-ENV MAGE_SHA=4ed742bd7f932bbced065d378991ccf6f64940d8967f513941991ad756dce321
+ENV MAGE_VERSION=1.0.2
+ENV MAGE_SHA=49f6eb1a5e2acb8d55c879613e7fb612daaab638a85ce482544412d88a46f7d7
 ENV MAGE_DOWNLOAD_FILE=mage_${MAGE_VERSION}_Linux-64bit.tar.gz
 ENV MAGE_DOWNLOAD_URL=https://github.com/magefile/mage/releases/download/v${MAGE_VERSION}/${MAGE_DOWNLOAD_FILE}
 
@@ -26,7 +26,7 @@ RUN  wget ${GORELEASER_DOWNLOAD_URL}; \
 			tar -xzf $MAGE_DOWNLOAD_FILE -C /usr/bin/ mage; \
 			rm $MAGE_DOWNLOAD_FILE; \
 			apt-get update; \
-		  	apt-get install -y ruby ruby-dev ruby-bundler; \
+			apt-get install -y nano ruby ruby-dev ruby-bundler; \
 		  	rm -rf /var/lib/apt/lists/*; \
 		  	gem install fpm;
 
