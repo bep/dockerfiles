@@ -1,4 +1,4 @@
-FROM golang:1.9.3
+FROM golang:1.9.4
 
 LABEL maintainer="bjorn.erik.pedersen@gmail.com"
 
@@ -26,7 +26,7 @@ RUN  wget ${GORELEASER_DOWNLOAD_URL}; \
 			tar -xzf $MAGE_DOWNLOAD_FILE -C /usr/bin/ mage; \
 			rm $MAGE_DOWNLOAD_FILE; \
 			apt-get update; \
-			apt-get install -y nano ruby ruby-dev ruby-bundler; \
+			apt-get install -y nano autoconf libtool ruby ruby-dev ruby-bundler; \
 		  	rm -rf /var/lib/apt/lists/*; \
 		  	gem install fpm;
 
