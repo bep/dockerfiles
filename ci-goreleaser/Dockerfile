@@ -3,7 +3,7 @@ FROM golang:1.10.1
 LABEL maintainer="bjorn.erik.pedersen@gmail.com"
 
 ENV GORELEASER_VERSION=0.79.0
-ENV GORELEASER_SHA=013b6289cff41b8afca638007a727170efc8d61469405e2a5d30edf1343e5b68
+ENV GORELEASER_SHA=14d24fdfdc8a7aff0956e4c0dcfad8a71fbaed804013be4ee93d26955dc75704
 
 ENV GORELEASER_DOWNLOAD_FILE=goreleaser_Linux_x86_64.tar.gz
 ENV GORELEASER_DOWNLOAD_URL=https://github.com/goreleaser/goreleaser/releases/download/v${GORELEASER_VERSION}/${GORELEASER_DOWNLOAD_FILE}
