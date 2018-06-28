@@ -2,8 +2,8 @@ FROM golang:1.10.1
 
 LABEL maintainer="bjorn.erik.pedersen@gmail.com"
 
-ENV GORELEASER_VERSION=0.34.2
-ENV GORELEASER_SHA=013b6289cff41b8afca638007a727170efc8d61469405e2a5d30edf1343e5b68
+ENV GORELEASER_VERSION=0.79.0
+ENV GORELEASER_SHA=14d24fdfdc8a7aff0956e4c0dcfad8a71fbaed804013be4ee93d26955dc75704
 
 ENV GORELEASER_DOWNLOAD_FILE=goreleaser_Linux_x86_64.tar.gz
 ENV GORELEASER_DOWNLOAD_URL=https://github.com/goreleaser/goreleaser/releases/download/v${GORELEASER_VERSION}/${GORELEASER_DOWNLOAD_FILE}
@@ -26,9 +26,8 @@ RUN  wget ${GORELEASER_DOWNLOAD_URL}; \
 			tar -xzf $MAGE_DOWNLOAD_FILE -C /usr/bin/ mage; \
 			rm $MAGE_DOWNLOAD_FILE; \
 			apt-get update; \
-			apt-get install -y nano autoconf libtool ruby ruby-dev ruby-bundler; \
-		  	rm -rf /var/lib/apt/lists/*; \
-		  	gem install fpm;
+			apt-get install -y nano autoconf libtool; \
+		  	rm -rf /var/lib/apt/lists/*;
 
 CMD ["goreleaser", "-v"]
 
