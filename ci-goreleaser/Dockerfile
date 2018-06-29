@@ -1,4 +1,4 @@
-FROM golang:1.10.1
+FROM golang:1.10.3
 
 LABEL maintainer="bjorn.erik.pedersen@gmail.com"
 
@@ -24,10 +24,6 @@ RUN  wget ${GORELEASER_DOWNLOAD_URL}; \
 			wget ${MAGE_DOWNLOAD_URL}; \
 			echo "$MAGE_SHA $MAGE_DOWNLOAD_FILE" | sha256sum -c - || exit 1; \
 			tar -xzf $MAGE_DOWNLOAD_FILE -C /usr/bin/ mage; \
-			rm $MAGE_DOWNLOAD_FILE; \
-			apt-get update; \
-			apt-get install -y nano autoconf libtool; \
-		  	rm -rf /var/lib/apt/lists/*;
-
+			rm $MAGE_DOWNLOAD_FILE;	
 CMD ["goreleaser", "-v"]
 
