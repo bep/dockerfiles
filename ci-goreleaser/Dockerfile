@@ -24,6 +24,23 @@ RUN  wget ${GORELEASER_DOWNLOAD_URL}; \
 			wget ${MAGE_DOWNLOAD_URL}; \
 			echo "$MAGE_SHA $MAGE_DOWNLOAD_FILE" | sha256sum -c - || exit 1; \
 			tar -xzf $MAGE_DOWNLOAD_FILE -C /usr/bin/ mage; \
-			rm $MAGE_DOWNLOAD_FILE;	
+			rm $MAGE_DOWNLOAD_FILE; \
+			apt-get update && \
+			apt-get install -y automake autogen build-essential ca-certificates \
+			gcc-multilib gcc-mingw-w64 g++-mingw-w64 --no-install-recommends; \
+			rm -rf /var/lib/apt/lists/*;
 CMD ["goreleaser", "-v"]
 
+
+# Windows:
+# GOOS=windows GOARCH=amd64 CGO_ENABLED=1 CC=x86_64-w64-mingw32-gcc CXX=x86_64-w64-mingw32-g++ go build -tags extended
+
+
+# Notes:
+#GOOS=windows GOARCH=386 CGO_ENABLED=1 CC=i686-w64-ming32-gcc CXX=i686-w64-mingw32-g++ CGO_LDFLAGS="-static" go build -i -v -x -ldflags "-extldflags '-static' -extld=$CC"
+
+
+#echo "Bootstrapping windows/386..."
+#GOOS=windows GOARCH=386 CGO_ENABLED=1 CC=i686-w64-mingw32-gcc go install std
+
+# GOOS=darwin GOARCH=amd64 CGO_ENABLED=1 CC=o64-clang go install std
