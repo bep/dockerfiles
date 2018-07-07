@@ -13,6 +13,31 @@ ENV MAGE_SHA=44f4a34fcf7bd17c11c6ed2a7b495900c771289c580fdef517a950fdccd15e02
 ENV MAGE_DOWNLOAD_FILE=mage_${MAGE_VERSION}_Linux-64bit.tar.gz
 ENV MAGE_DOWNLOAD_URL=https://github.com/magefile/mage/releases/download/${MAGE_VERSION}/${MAGE_DOWNLOAD_FILE}
 
+# Install tools
+RUN apt-get update && \
+    apt-get install -y automake autogen \
+    libtool libxml2-dev uuid-dev libssl-dev bash \
+    patch make tar xz-utils bzip2 gzip sed cpio \
+	gcc-multilib g++-multilib gcc-mingw-w64 g++-mingw-w64 clang llvm-dev --no-install-recommends || exit 1; \
+	rm -rf /var/lib/apt/lists/*;
+
+# Cross compile setup
+ENV OSX_SDK_VERSION 10.11
+ENV OSX_SDK     MacOSX$OSX_SDK_VERSION.sdk
+ENV OSX_NDK_X86 /usr/local/osx-ndk-x86
+ENV OSX_SDK_PATH /$OSX_SDK.tar.gz
+
+COPY $OSX_SDK.tar.gz /go
+
+RUN git clone https://github.com/tpoechtrager/osxcross.git && \
+    git -C osxcross checkout c47ff0aeed1a7d0e1f884812fc170e415f05be5a && \
+    mv $OSX_SDK.tar.gz osxcross/tarballs/ && \
+    UNATTENDED=yes SDK_VERSION=${OSX_SDK_VERSION} OSX_VERSION_MIN=10.9 osxcross/build.sh && \
+    mv osxcross/target $OSX_NDK_X86;
+    #rm -rf osxcross;
+
+ENV PATH $OSX_NDK_X86/bin:$PATH
+
 RUN mkdir -p /root/.ssh; \
     chmod 0700 /root/.ssh; \
     ssh-keyscan github.com > /root/.ssh/known_hosts;
@@ -24,23 +49,24 @@ RUN  wget ${GORELEASER_DOWNLOAD_URL}; \
 			wget ${MAGE_DOWNLOAD_URL}; \
 			echo "$MAGE_SHA $MAGE_DOWNLOAD_FILE" | sha256sum -c - || exit 1; \
 			tar -xzf $MAGE_DOWNLOAD_FILE -C /usr/bin/ mage; \
-			rm $MAGE_DOWNLOAD_FILE; \
-			apt-get update && \
-			apt-get install -y automake autogen build-essential ca-certificates \
-			gcc-multilib gcc-mingw-w64 g++-mingw-w64 --no-install-recommends; \
-			rm -rf /var/lib/apt/lists/*;
+			rm $MAGE_DOWNLOAD_FILE;
+			
 CMD ["goreleaser", "-v"]
 
 
 # Windows:
 # GOOS=windows GOARCH=amd64 CGO_ENABLED=1 CC=x86_64-w64-mingw32-gcc CXX=x86_64-w64-mingw32-g++ go build -tags extended
+# GOOS=windows GOARCH=386 
+# Darwin
+# 
+# GOOS=darwin GOARCH=amd64 CGO_ENABLED=1 CC=clang go build -tags extended
+# GOOS=darwin GOARCH=386 CGO_ENABLED=1 CC=o32-clang go install std
+# CC=o64-clang CXX=o64-clang++ GOOS=darwin GOARCH=amd64 CGO_ENABLED=1 go build -tags extended
 
 
-# Notes:
-#GOOS=windows GOARCH=386 CGO_ENABLED=1 CC=i686-w64-ming32-gcc CXX=i686-w64-mingw32-g++ CGO_LDFLAGS="-static" go build -i -v -x -ldflags "-extldflags '-static' -extld=$CC"
+# Linux
+# GOOS=linux GOARCH=amd64 CGO_ENABLED=1 go build -tags extended
 
 
-#echo "Bootstrapping windows/386..."
-#GOOS=windows GOARCH=386 CGO_ENABLED=1 CC=i686-w64-mingw32-gcc go install std
+#  GOOS=linux GOARCH=amd64 CGO_ENABLED=1 go build -ldflags "-extldflags '-static'" -tags extended
 
-# GOOS=darwin GOARCH=amd64 CGO_ENABLED=1 CC=o64-clang go install std
