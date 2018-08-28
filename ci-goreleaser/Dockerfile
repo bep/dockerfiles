@@ -1,17 +1,17 @@
-FROM golang:1.10.3
+FROM golang:1.11
 
 LABEL maintainer="bjorn.erik.pedersen@gmail.com"
 
-ENV GORELEASER_VERSION=0.79.0
-ENV GORELEASER_SHA=14d24fdfdc8a7aff0956e4c0dcfad8a71fbaed804013be4ee93d26955dc75704
+ENV GORELEASER_VERSION=0.83.3
+ENV GORELEASER_SHA=164968cabbb988876fe05a23adc39351ec9a12073fb07453540d11db707255b7
 
 ENV GORELEASER_DOWNLOAD_FILE=goreleaser_Linux_x86_64.tar.gz
 ENV GORELEASER_DOWNLOAD_URL=https://github.com/goreleaser/goreleaser/releases/download/v${GORELEASER_VERSION}/${GORELEASER_DOWNLOAD_FILE}
 
-ENV MAGE_VERSION=2.1
-ENV MAGE_SHA=44f4a34fcf7bd17c11c6ed2a7b495900c771289c580fdef517a950fdccd15e02
+ENV MAGE_VERSION=2.2.0
+ENV MAGE_SHA=4a50eb20980fb323700a4ae82ad9dfbc527d006886a130d77e6bf5d41a37f3b9
 ENV MAGE_DOWNLOAD_FILE=mage_${MAGE_VERSION}_Linux-64bit.tar.gz
-ENV MAGE_DOWNLOAD_URL=https://github.com/magefile/mage/releases/download/${MAGE_VERSION}/${MAGE_DOWNLOAD_FILE}
+ENV MAGE_DOWNLOAD_URL=https://github.com/magefile/mage/releases/download/v${MAGE_VERSION}/${MAGE_DOWNLOAD_FILE}
 
 # Install tools
 RUN apt-get update && \
