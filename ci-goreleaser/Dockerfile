@@ -56,8 +56,9 @@ CMD ["goreleaser", "-v"]
 
 # Notes for self:
 # Windows:
-# GOOS=windows GOARCH=amd64 CGO_ENABLED=1 CC=x86_64-w64-mingw32-gcc CXX=x86_64-w64-mingw32-g++ go build -tags extended
-#
+# GOOS=windows GOARCH=amd64 CGO_ENABLED=1 CC=x86_64-w64-mingw32-gcc CXX=x86_64-w64-mingw32-g++  go build -ldflags "-extldflags '-static'" -tags extended
+
+
 # Darwin
 # CC=o64-clang CXX=o64-clang++ GOOS=darwin GOARCH=amd64 CGO_ENABLED=1 go build -tags extended
-# goreleaser --skip-publish --skip-validate --rm-dist
+# goreleaser --config=goreleaser-extended.yml --release-notes=temp/rel43.md --skip-publish --skip-validate --rm-dist
