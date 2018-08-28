@@ -8,11 +8,6 @@ ENV GORELEASER_SHA=164968cabbb988876fe05a23adc39351ec9a12073fb07453540d11db70725
 ENV GORELEASER_DOWNLOAD_FILE=goreleaser_Linux_x86_64.tar.gz
 ENV GORELEASER_DOWNLOAD_URL=https://github.com/goreleaser/goreleaser/releases/download/v${GORELEASER_VERSION}/${GORELEASER_DOWNLOAD_FILE}
 
-ENV MAGE_VERSION=2.2.0
-ENV MAGE_SHA=4a50eb20980fb323700a4ae82ad9dfbc527d006886a130d77e6bf5d41a37f3b9
-ENV MAGE_DOWNLOAD_FILE=mage_${MAGE_VERSION}_Linux-64bit.tar.gz
-ENV MAGE_DOWNLOAD_URL=https://github.com/magefile/mage/releases/download/v${MAGE_VERSION}/${MAGE_DOWNLOAD_FILE}
-
 # Install tools
 RUN apt-get update && \
     apt-get install -y automake autogen \
@@ -45,11 +40,7 @@ RUN mkdir -p /root/.ssh; \
 RUN  wget ${GORELEASER_DOWNLOAD_URL}; \
 			echo "$GORELEASER_SHA $GORELEASER_DOWNLOAD_FILE" | sha256sum -c - || exit 1; \
 			tar -xzf $GORELEASER_DOWNLOAD_FILE -C /usr/bin/ goreleaser; \
-			rm $GORELEASER_DOWNLOAD_FILE; \
-			wget ${MAGE_DOWNLOAD_URL}; \
-			echo "$MAGE_SHA $MAGE_DOWNLOAD_FILE" | sha256sum -c - || exit 1; \
-			tar -xzf $MAGE_DOWNLOAD_FILE -C /usr/bin/ mage; \
-			rm $MAGE_DOWNLOAD_FILE;
+			rm $GORELEASER_DOWNLOAD_FILE;
 			
 CMD ["goreleaser", "-v"]
 
@@ -61,4 +52,4 @@ CMD ["goreleaser", "-v"]
 
 # Darwin
 # CC=o64-clang CXX=o64-clang++ GOOS=darwin GOARCH=amd64 CGO_ENABLED=1 go build -tags extended
-# goreleaser --config=goreleaser-extended.yml --release-notes=temp/rel43.md --skip-publish --skip-validate --rm-dist
+env GO111MODULE=on goreleaser --config=goreleaser-extended.yml --skip-publish --skip-validate --rm-dist --release-notes=temp/0.48-relnotes-ready.md
