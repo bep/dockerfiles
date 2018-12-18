@@ -1,4 +1,4 @@
-FROM golang:1.11
+FROM golang:1.11.4
 
 LABEL maintainer="bjorn.erik.pedersen@gmail.com"
 
@@ -52,4 +52,4 @@ CMD ["goreleaser", "-v"]
 
 # Darwin
 # CC=o64-clang CXX=o64-clang++ GOOS=darwin GOARCH=amd64 CGO_ENABLED=1 go build -tags extended
-env GO111MODULE=on goreleaser --config=goreleaser-extended.yml --skip-publish --skip-validate --rm-dist --release-notes=temp/0.48-relnotes-ready.md
+# env GO111MODULE=on goreleaser --config=goreleaser-extended.yml --skip-publish --skip-validate --rm-dist --release-notes=temp/0.48-relnotes-ready.md
