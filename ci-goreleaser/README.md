@@ -12,7 +12,9 @@ version=0.30.5-1 make install
 
 The OSX part of the build requires the MaxOS SDK.
 
-To obtain it, register for a developer account, then download the [Xcode 7.3.1 dmg](https://developer.apple.com/devcenter/download.action?path=/Developer_Tools/Xcode_7.3.1/Xcode_7.3.1.dmg).
+To obtain it, register for a developer account, then download Xcode:
+
+https://download.developer.apple.com/Developer_Tools/Xcode_10.3/Xcode_10.3.xip
 
 
 Using macOS, you can mount the dmg and create the SDK tarfile with `create_osx_sdk.sh`.
