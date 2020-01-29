@@ -1,9 +1,10 @@
-FROM golang:1.13.4
+ARG  GOLANG_VERSION=1.13.5
+FROM golang:${GOLANG_VERSION}
 
 LABEL maintainer="bjorn.erik.pedersen@gmail.com"
 
-ENV GORELEASER_VERSION=0.109.0
-ENV GORELEASER_SHA=5120d00d06cbc351a155d9cf6a8cebf890d0490174c4da5450b316d9ad60f843
+ARG GORELEASER_VERSION=0.109.0
+ARG GORELEASER_SHA=5120d00d06cbc351a155d9cf6a8cebf890d0490174c4da5450b316d9ad60f843
 
 ENV GORELEASER_DOWNLOAD_FILE=goreleaser_Linux_x86_64.tar.gz
 ENV GORELEASER_DOWNLOAD_URL=https://github.com/goreleaser/goreleaser/releases/download/v${GORELEASER_VERSION}/${GORELEASER_DOWNLOAD_FILE}
@@ -17,7 +18,8 @@ RUN apt-get update && \
 	rm -rf /var/lib/apt/lists/*;
 
 # Cross compile setup
-ENV OSX_SDK_VERSION 	10.12
+ARG OSX_SDK_VERSION=10.12
+ENV OSX_SDK_VERSION=${OSX_SDK_VERSION}
 ENV OSX_SDK     		MacOSX$OSX_SDK_VERSION.sdk
 ENV OSX_NDK_X86 		/usr/local/osx-ndk-x86
 ENV OSX_SDK_PATH 		/$OSX_SDK.tar.gz
