@@ -1,4 +1,4 @@
-FROM golang:1.13.4
+FROM golang:1.14
 
 LABEL maintainer="bjorn.erik.pedersen@gmail.com"
 
