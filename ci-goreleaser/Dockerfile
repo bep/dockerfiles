@@ -1,4 +1,4 @@
-FROM golang:1.14.3
+FROM golang:1.15.1
 
 LABEL maintainer="bjorn.erik.pedersen@gmail.com"
 
@@ -13,8 +13,8 @@ RUN apt-get update && \
     apt-get install -y automake autogen \
     libtool libxml2-dev uuid-dev libssl-dev bash \
     patch cmake make tar xz-utils bzip2 gzip zlib1g-dev sed cpio \
-	gcc-multilib g++-multilib gcc-mingw-w64 g++-mingw-w64 clang llvm-dev --no-install-recommends || exit 1; \
-	rm -rf /var/lib/apt/lists/*;
+    gcc-multilib g++-multilib gcc-mingw-w64 g++-mingw-w64 clang llvm-dev --no-install-recommends || exit 1; \
+    rm -rf /var/lib/apt/lists/*;
 
 # Cross compile setup
 ENV OSX_SDK_VERSION 	10.12
@@ -39,10 +39,10 @@ RUN mkdir -p /root/.ssh; \
     ssh-keyscan github.com > /root/.ssh/known_hosts;
 
 RUN  wget ${GORELEASER_DOWNLOAD_URL}; \
-			echo "$GORELEASER_SHA $GORELEASER_DOWNLOAD_FILE" | sha256sum -c - || exit 1; \
-			tar -xzf $GORELEASER_DOWNLOAD_FILE -C /usr/bin/ goreleaser; \
-			rm $GORELEASER_DOWNLOAD_FILE;
-			
+    echo "$GORELEASER_SHA $GORELEASER_DOWNLOAD_FILE" | sha256sum -c - || exit 1; \
+    tar -xzf $GORELEASER_DOWNLOAD_FILE -C /usr/bin/ goreleaser; \
+    rm $GORELEASER_DOWNLOAD_FILE;
+
 CMD ["goreleaser", "-v"]
 
 
