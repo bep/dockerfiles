@@ -17,7 +17,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*;
 
 # Cross compile setup
-ENV OSX_SDK_VERSION 	10.12
+ENV OSX_SDK_VERSION 	11.1
 ENV OSX_SDK     		MacOSX$OSX_SDK_VERSION.sdk
 ENV OSX_NDK_X86 		/usr/local/osx-ndk-x86
 ENV OSX_SDK_PATH 		/$OSX_SDK.tar.gz
@@ -25,7 +25,7 @@ ENV OSX_SDK_PATH 		/$OSX_SDK.tar.gz
 COPY $OSX_SDK.tar.gz /go
 
 RUN git clone https://github.com/tpoechtrager/osxcross.git && \
-    git -C osxcross checkout d39ba022313f2d5a1f5d02caaa1efb23d07a559b || exit 1; \
+    git -C osxcross checkout 035cc170338b7b252e3f13b0e3ccbf4411bffc41 || exit 1; \
     mv $OSX_SDK.tar.gz osxcross/tarballs/ && \
     UNATTENDED=yes SDK_VERSION=${OSX_SDK_VERSION} OSX_VERSION_MIN=10.10 osxcross/build.sh || exit 1; \
     mv osxcross/target $OSX_NDK_X86; \
@@ -52,5 +52,6 @@ CMD ["goreleaser", "-v"]
 
 
 # Darwin
-# env GO111MODULE=on CC=o64-clang CXX=o64-clang++ GOOS=darwin GOARCH=amd64 CGO_ENABLED=1 go build -tags extended
-# env GO111MODULE=on goreleaser --config=goreleaser-extended.yml --skip-publish --skip-validate --rm-dist --release-notes=temp/0.48-relnotes-ready.md
+# CC=o64-clang CXX=o64-clang++ GOOS=darwin GOARCH=amd64 CGO_ENABLED=1 go build -tags extended
+# CC=o64-clang CXX=o64-clang++ GOOS=darwin GOARCH=arm64 CGO_ENABLED=1 go build -tags extended
+# goreleaser --skip-publish --skip-validate --rm-dist

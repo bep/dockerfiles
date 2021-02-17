@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 TMP=$(mktemp -d /tmp/XXXXXXXXXXX)
-SDK="MacOSX10.12.sdk"
+SDK="MacOSX11.1.sdk"
 
 mkdir -p $TMP/$SDK/usr/include/c++
 
@@ -10,4 +10,3 @@ cp -rf ~/Downloads/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolch
 
 
 tar -C $TMP -czf $SDK.tar.gz $SDK
- 
