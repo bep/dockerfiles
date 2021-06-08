@@ -1,9 +1,9 @@
-FROM golang:1.16.0
+FROM golang:1.16.5
 
 LABEL maintainer="bjorn.erik.pedersen@gmail.com"
 
-ENV GORELEASER_VERSION=0.156.2
-ENV GORELEASER_SHA=875371b95da87218e4f06f084f5c5da72fde87013790132b41b1243f33e65745
+ENV GORELEASER_VERSION=0.169.0
+ENV GORELEASER_SHA=f139fe6191da2209192f43c3a77220067f99c623c78096c2315cbe93facb5455
 
 ENV GORELEASER_DOWNLOAD_FILE=goreleaser_Linux_x86_64.tar.gz
 ENV GORELEASER_DOWNLOAD_URL=https://github.com/goreleaser/goreleaser/releases/download/v${GORELEASER_VERSION}/${GORELEASER_DOWNLOAD_FILE}
@@ -54,4 +54,4 @@ CMD ["goreleaser", "-v"]
 # Darwin
 # CC=o64-clang CXX=o64-clang++ GOOS=darwin GOARCH=amd64 CGO_ENABLED=1 go build -tags extended
 # CC=o64-clang CXX=o64-clang++ GOOS=darwin GOARCH=arm64 CGO_ENABLED=1 go build -tags extended
-# goreleaser --skip-publish --skip-validate --rm-dist
+# goreleaser -p 2 --skip-publish --skip-validate --rm-dist
