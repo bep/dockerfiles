@@ -1,4 +1,4 @@
-This Docker file allows cross building (and releasing with [Goreleaser](https://github.com/goreleaser/goreleaser) using CGO for Linux, MacOS and Windows. If your application does not use CGO (C or C++ binding) you should probably use something much simpler.
+This Docker file allows cross building (and releasing with [Goreleaser](https://github.com/goreleaser/goreleaser)) using CGO for Linux, MacOS and Windows. If your application does not use CGO (C or C++ bindings) you should probably use something much simpler.
 
 ## Versioning
 
