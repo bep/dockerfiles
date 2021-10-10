@@ -1,4 +1,4 @@
-FROM golang:1.17.0
+FROM golang:1.17.2-buster
 
 LABEL maintainer="bjorn.erik.pedersen@gmail.com"
 
@@ -55,3 +55,4 @@ CMD ["goreleaser", "-v"]
 # CC=o64-clang CXX=o64-clang++ GOOS=darwin GOARCH=amd64 CGO_ENABLED=1 go build -tags extended
 # CC=o64-clang CXX=o64-clang++ GOOS=darwin GOARCH=arm64 CGO_ENABLED=1 go build -tags extended
 # goreleaser -p 2 --skip-publish --skip-validate --rm-dist
+# goreleaser build --id hugo_extended_linux --skip-validate --rm-dist
