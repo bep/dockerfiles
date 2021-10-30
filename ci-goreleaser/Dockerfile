@@ -2,8 +2,8 @@ FROM golang:1.17.2-buster
 
 LABEL maintainer="bjorn.erik.pedersen@gmail.com"
 
-ENV GORELEASER_VERSION=0.176.0
-ENV GORELEASER_SHA=13bf8ef4ec33d4f3ff2d2c7c02361946e29d69093cf7102e46dcb49e48a31435
+ENV GORELEASER_VERSION=0.183.0
+ENV GORELEASER_SHA=03e6b0da36f65a942ca0279e767ab5cae145958d3a8f91a0204f5ad71371787f
 
 ENV GORELEASER_DOWNLOAD_FILE=goreleaser_Linux_x86_64.tar.gz
 ENV GORELEASER_DOWNLOAD_URL=https://github.com/goreleaser/goreleaser/releases/download/v${GORELEASER_VERSION}/${GORELEASER_DOWNLOAD_FILE}
@@ -55,4 +55,6 @@ CMD ["goreleaser", "-v"]
 # CC=o64-clang CXX=o64-clang++ GOOS=darwin GOARCH=amd64 CGO_ENABLED=1 go build -tags extended
 # CC=o64-clang CXX=o64-clang++ GOOS=darwin GOARCH=arm64 CGO_ENABLED=1 go build -tags extended
 # goreleaser -p 2 --skip-publish --skip-validate --rm-dist
+# goreleaser --skip-publish --skip-validate --rm-dist
 # goreleaser build --id hugo_extended_linux --skip-validate --rm-dist
+# goreleaser build --id hugo_extended_darwin --skip-validate --rm-dist
