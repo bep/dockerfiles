@@ -2,13 +2,12 @@ This Docker file allows cross building (and releasing with [Goreleaser](https://
 
 ## Versioning
 
-We use the [Semver Pair Encoding](https://github.com/bep/semverpair) with the Go version as the main version.
+The version represents the Go version + a counter.
 
-
-So if the Go version is `1.17.2` and this is the first version based on that:
+So if the Go version is `1.16.0` and this is the first version based on that:
 
 ```bwiash
-version=1.1700.200 make install
+version=1.16.0-1 make install
 ```
 
 ## MacOS
