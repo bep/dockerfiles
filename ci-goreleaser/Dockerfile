@@ -1,4 +1,4 @@
-FROM golang:1.17.2-buster
+FROM golang:1.17.4-buster
 
 LABEL maintainer="bjorn.erik.pedersen@gmail.com"
 
