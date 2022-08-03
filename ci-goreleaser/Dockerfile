@@ -1,12 +1,7 @@
-FROM golang:1.19.0-buster
+FROM bepsays/ci-goreleaser-base:1.21900.20000
 
 LABEL maintainer="bjorn.erik.pedersen@gmail.com"
 
-ENV GORELEASER_VERSION=1.10.3
-ENV GORELEASER_SHA=942c2ddc87b589fd73f5b612909c31298b1e8b8a7ee9b6a463dd5038030b1cc2
-
-ENV GORELEASER_DOWNLOAD_FILE=goreleaser_Linux_x86_64.tar.gz
-ENV GORELEASER_DOWNLOAD_URL=https://github.com/goreleaser/goreleaser/releases/download/v${GORELEASER_VERSION}/${GORELEASER_DOWNLOAD_FILE}
 
 # Install tools
 RUN apt-get update && \
@@ -34,16 +29,6 @@ RUN git clone https://github.com/tpoechtrager/osxcross.git && \
 ENV PATH $OSX_NDK_X86/bin:$PATH
 ENV LD_LIBRARY_PATH=$OSX_NDK_X86/lib:$LD_LIBRARY_PATH
 
-RUN mkdir -p /root/.ssh; \
-    chmod 0700 /root/.ssh; \
-    ssh-keyscan github.com > /root/.ssh/known_hosts;
-
-RUN  wget ${GORELEASER_DOWNLOAD_URL}; \
-    echo "$GORELEASER_SHA $GORELEASER_DOWNLOAD_FILE" | sha256sum -c - || exit 1; \
-    tar -xzf $GORELEASER_DOWNLOAD_FILE -C /usr/bin/ goreleaser; \
-    rm $GORELEASER_DOWNLOAD_FILE;
-
-CMD ["goreleaser", "-v"]
 
 
 # Notes for self:
@@ -56,3 +41,4 @@ CMD ["goreleaser", "-v"]
 # CC=o64-clang CXX=o64-clang++ GOOS=darwin GOARCH=arm64 CGO_ENABLED=1 go build -tags extended
 # goreleaser -p 2 --skip-publish --skip-validate --rm-dist
 # goreleaser build --id hugo_extended_linux --skip-validate --rm-dist
+# goreleaser release --skip-publish --skip-validate --rm-dist
