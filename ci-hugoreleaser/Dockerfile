@@ -2,7 +2,7 @@ FROM golang:1.19.0-buster
 
 LABEL maintainer="bjorn.erik.pedersen@gmail.com"
 
-ENV HUGORELEASER_VERSION=v0.52.0
+ENV HUGORELEASER_VERSION=v0.53.0
 
 RUN mkdir -p /root/.ssh; \
     chmod 0700 /root/.ssh; \
