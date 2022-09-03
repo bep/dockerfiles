@@ -2,7 +2,7 @@ FROM golang:1.19.0-buster
 
 LABEL maintainer="bjorn.erik.pedersen@gmail.com"
 
-ENV HUGORELEASER_VERSION=v0.53.0
+ENV HUGORELEASER_VERSION=v0.54.0
 
 # Install tools
 RUN go install github.com/gohugoio/hugoreleaser@$HUGORELEASER_VERSION
