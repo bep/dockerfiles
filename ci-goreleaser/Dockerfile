@@ -1,4 +1,4 @@
-FROM bepsays/ci-goreleaser-base:1.21900.20000
+FROM bepsays/ci-goreleaser-base:1.22000.20000
 
 LABEL maintainer="bjorn.erik.pedersen@gmail.com"
 
