@@ -1,4 +1,4 @@
-FROM golang:1.21.0-bullseye 
+FROM bepsays/ci-go:1.22100.20100
 
 LABEL maintainer="bjorn.erik.pedersen@gmail.com"
 

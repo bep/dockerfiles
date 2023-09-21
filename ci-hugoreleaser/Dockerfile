@@ -1,4 +1,4 @@
-FROM golang:1.21.1-alpine3.17
+FROM bepsays/ci-go:1.22100.20100
 
 LABEL maintainer="bjorn.erik.pedersen@gmail.com"
 
