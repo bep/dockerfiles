@@ -1,4 +1,4 @@
-FROM golang:1.21.0-bullseye
+FROM golang:1.21.1-alpine3.17
 
 LABEL maintainer="bjorn.erik.pedersen@gmail.com"
 
