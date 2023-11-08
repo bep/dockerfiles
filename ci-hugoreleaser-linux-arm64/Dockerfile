@@ -1,4 +1,4 @@
-FROM bepsays/ci-go:1.22100.20100
+FROM bepsays/ci-go:1.22100.20400
 
 LABEL maintainer="bjorn.erik.pedersen@gmail.com"
 
