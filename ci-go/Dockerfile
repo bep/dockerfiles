@@ -91,7 +91,7 @@ RUN set -eux; \
 	epoch="$(stat -c '%Y' /usr/local/go)"; \
 	[ "$SOURCE_DATE_EPOCH" = "$epoch" ]
 
-FROM buildpack-deps:bullseye-scm
+FROM buildpack-deps:buster-scm
 
 # install cgo-related dependencies
 RUN set -eux; \
