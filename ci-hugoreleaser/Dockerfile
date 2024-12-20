@@ -2,7 +2,7 @@ FROM bepsays/ci-go:1.22300.20400
 
 LABEL maintainer="bjorn.erik.pedersen@gmail.com"
 
-ENV HUGORELEASER_VERSION=v0.57.0
+ENV HUGORELEASER_VERSION=v0.59.0
 
 RUN mkdir -p /root/.ssh; \
     chmod 0700 /root/.ssh; \
