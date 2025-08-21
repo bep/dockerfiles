@@ -1,5 +1,5 @@
 #
-# This is adapted from https://github.com/docker-library/golang/blob/master/1.24/bullseye/Dockerfile
+# This is adapted from https://github.com/docker-library/golang/tree/master/1.25/bookworm/Dockerfile
 # They have stopped making Docker images for Buster/Debian 10.
 # See https://github.com/gohugoio/hugo/issues/11414 for more info.
 
@@ -7,7 +7,7 @@ FROM buildpack-deps:buster-scm AS build
 
 ENV PATH /usr/local/go/bin:$PATH
 
-ENV GOLANG_VERSION 1.24.0
+ENV GOLANG_VERSION 1.25.0
 
 RUN set -eux; \
 	now="$(date '+%s')"; \
@@ -15,36 +15,36 @@ RUN set -eux; \
 	url=; \
 	case "$arch" in \
 		'amd64') \
-			url='https://dl.google.com/go/go1.24.0.linux-amd64.tar.gz'; \
-			sha256='dea9ca38a0b852a74e81c26134671af7c0fbe65d81b0dc1c5bfe22cf7d4c8858'; \
+			url='https://dl.google.com/go/go1.25.0.linux-amd64.tar.gz'; \
+			sha256='2852af0cb20a13139b3448992e69b868e50ed0f8a1e5940ee1de9e19a123b613'; \
 			;; \
 		'armhf') \
-			url='https://dl.google.com/go/go1.24.0.linux-armv6l.tar.gz'; \
-			sha256='695dc54fa14cd3124fa6900d7b5ae39eeac23f7a4ecea81656070160fac2c54a'; \
+			url='https://dl.google.com/go/go1.25.0.linux-armv6l.tar.gz'; \
+			sha256='a5a8f8198fcf00e1e485b8ecef9ee020778bf32a408a4e8873371bfce458cd09'; \
 			;; \
 		'arm64') \
-			url='https://dl.google.com/go/go1.24.0.linux-arm64.tar.gz'; \
-			sha256='c3fa6d16ffa261091a5617145553c71d21435ce547e44cc6dfb7470865527cc7'; \
+			url='https://dl.google.com/go/go1.25.0.linux-arm64.tar.gz'; \
+			sha256='05de75d6994a2783699815ee553bd5a9327d8b79991de36e38b66862782f54ae'; \
 			;; \
 		'i386') \
-			url='https://dl.google.com/go/go1.24.0.linux-386.tar.gz'; \
-			sha256='90521453a59c6ce20364d2dc7c38532949b033b602ba12d782caeb90af1b0624'; \
+			url='https://dl.google.com/go/go1.25.0.linux-386.tar.gz'; \
+			sha256='8c602dd9d99bc9453b3995d20ce4baf382cc50855900a0ece5de9929df4a993a'; \
 			;; \
 		'mips64el') \
-			url='https://dl.google.com/go/go1.24.0.linux-mips64le.tar.gz'; \
-			sha256='b847893ff119389c939adc2b8516b6500204b7cb49d5e19b25e1c2091d2c74c6'; \
+			url='https://dl.google.com/go/go1.25.0.linux-mips64le.tar.gz'; \
+			sha256='70002c299ec7f7175ac2ef673b1b347eecfa54ae11f34416a6053c17f855afcc'; \
 			;; \
 		'ppc64el') \
-			url='https://dl.google.com/go/go1.24.0.linux-ppc64le.tar.gz'; \
-			sha256='a871a43de7d26c91dd90cb6e0adacb214c9e35ee2188c617c91c08c017efe81a'; \
+			url='https://dl.google.com/go/go1.25.0.linux-ppc64le.tar.gz'; \
+			sha256='0f18a89e7576cf2c5fa0b487a1635d9bcbf843df5f110e9982c64df52a983ad0'; \
 			;; \
 		'riscv64') \
-			url='https://dl.google.com/go/go1.24.0.linux-riscv64.tar.gz'; \
-			sha256='620dcf48c6297519aad6c81f8e344926dc0ab09a2a79f1e306964aece95a553d'; \
+			url='https://dl.google.com/go/go1.25.0.linux-riscv64.tar.gz'; \
+			sha256='c018ff74a2c48d55c8ca9b07c8e24163558ffec8bea08b326d6336905d956b67'; \
 			;; \
 		's390x') \
-			url='https://dl.google.com/go/go1.24.0.linux-s390x.tar.gz'; \
-			sha256='544d78b077c6b54bf78958c4a8285abec2d21f668fb007261c77418cd2edbb46'; \
+			url='https://dl.google.com/go/go1.25.0.linux-s390x.tar.gz'; \
+			sha256='34e5a2e19f2292fbaf8783e3a241e6e49689276aef6510a8060ea5ef54eee408'; \
 			;; \
 		*) echo >&2 "error: unsupported architecture '$arch' (likely packaging update needed)"; exit 1 ;; \
 	esac; \
@@ -115,7 +115,7 @@ RUN set -eux; \
 	; \
 	rm -rf /var/lib/apt/lists/*
 
-ENV GOLANG_VERSION 1.24.0
+ENV GOLANG_VERSION 1.25.0
 
 # don't auto-upgrade the gotoolchain
 # https://github.com/docker-library/golang/issues/472
