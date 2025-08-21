@@ -1,4 +1,4 @@
-FROM bepsays/ci-go:1.22500.20000
+FROM golang:1.25.0-bookworm
 
 LABEL maintainer="bjorn.erik.pedersen@gmail.com"
 
