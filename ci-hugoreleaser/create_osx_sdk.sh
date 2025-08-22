@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 TMP=$(mktemp -d /tmp/XXXXXXXXXXX)
-SDK="MacOSX11.1.sdk"
+SDK="MacOSX12.3.sdk"
 
 mkdir -p $TMP/$SDK/usr/include/c++
 

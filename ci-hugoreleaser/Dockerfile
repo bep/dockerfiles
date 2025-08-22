@@ -20,7 +20,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*;
 
 # Cross compile setup
-ENV OSX_SDK_VERSION 	11.1
+ENV OSX_SDK_VERSION 	12.3
 ENV OSX_SDK     		MacOSX$OSX_SDK_VERSION.sdk
 ENV OSX_NDK_X86 		/usr/local/osx-ndk-x86
 ENV OSX_SDK_PATH 		/$OSX_SDK.tar.gz
@@ -28,7 +28,7 @@ ENV OSX_SDK_PATH 		/$OSX_SDK.tar.gz
 COPY $OSX_SDK.tar.gz /go
 
 RUN git clone https://github.com/tpoechtrager/osxcross.git && \
-    git -C osxcross checkout 035cc170338b7b252e3f13b0e3ccbf4411bffc41 || exit 1; \
+    git -C osxcross checkout f873f534c6cdb0776e457af8c7513da1e02abe59 || exit 1; \
     mv $OSX_SDK.tar.gz osxcross/tarballs/ && \
     UNATTENDED=yes SDK_VERSION=${OSX_SDK_VERSION} OSX_VERSION_MIN=10.10 osxcross/build.sh || exit 1; \
     mv osxcross/target $OSX_NDK_X86; \
@@ -44,6 +44,9 @@ CMD ["hugoreleaser", "-h"]
 # Notes for self:
 # Windows:
 # GOOS=windows GOARCH=amd64 CGO_ENABLED=1 CC=x86_64-w64-mingw32-gcc CXX=x86_64-w64-mingw32-g++  go build -ldflags "-extldflags '-static'" -tags extended
+
+# Linux
+#  GOOS=linux GOARCH=amd64 CGO_ENABLED=1 go build -tags extended
 
 
 # Darwin
