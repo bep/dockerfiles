@@ -1,4 +1,4 @@
-FROM golang:1.25.0-bookworm
+FROM golang:1.25.1-bookworm
 
 LABEL maintainer="bjorn.erik.pedersen@gmail.com"
 
