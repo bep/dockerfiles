@@ -20,10 +20,10 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*;
 
 # Cross compile setup
-ENV OSX_SDK_VERSION 	12.3
-ENV OSX_SDK     		MacOSX$OSX_SDK_VERSION.sdk
-ENV OSX_NDK_X86 		/usr/local/osx-ndk-x86
-ENV OSX_SDK_PATH 		/$OSX_SDK.tar.gz
+ENV OSX_SDK_VERSION=12.3
+ENV OSX_SDK=MacOSX$OSX_SDK_VERSION.sdk
+ENV OSX_NDK_X86=/usr/local/osx-ndk-x86
+ENV OSX_SDK_PATH=/$OSX_SDK.tar.gz
 
 COPY $OSX_SDK.tar.gz /go
 
@@ -34,8 +34,8 @@ RUN git clone https://github.com/tpoechtrager/osxcross.git && \
     mv osxcross/target $OSX_NDK_X86; \
     rm -rf osxcross;
 
-ENV PATH $OSX_NDK_X86/bin:$PATH
-ENV LD_LIBRARY_PATH=$OSX_NDK_X86/lib:$LD_LIBRARY_PATH
+ENV PATH=$OSX_NDK_X86/bin:$PATH
+ENV LD_LIBRARY_PATH=$OSX_NDK_X86/lib
 
 CMD ["hugoreleaser", "-h"]
 
