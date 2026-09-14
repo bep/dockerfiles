@@ -1,4 +1,4 @@
-FROM golang:1.27.0-bookworm
+FROM golang:1.27.1-bookworm
 
 LABEL maintainer="bjorn.erik.pedersen@gmail.com"
 
@@ -8,8 +8,8 @@ ENV HUGORELEASER_VERSION=v0.60.0
 RUN go install github.com/gohugoio/hugoreleaser@$HUGORELEASER_VERSION
 
 RUN apt update \
-    && apt install -y --no-install-recommends \
-        binutils-aarch64-linux-gnu gcc-aarch64-linux-gnu g++-aarch64-linux-gnu \
-        && rm -rf /var/lib/apt/lists/*
+	&& apt install -y --no-install-recommends \
+	binutils-aarch64-linux-gnu gcc-aarch64-linux-gnu g++-aarch64-linux-gnu \
+	&& rm -rf /var/lib/apt/lists/*
 
 CMD ["hugoreleaser", "-h"]

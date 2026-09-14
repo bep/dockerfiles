@@ -1,23 +1,23 @@
-FROM golang:1.27.0-bookworm
+FROM golang:1.27.1-bookworm
 
 LABEL maintainer="bjorn.erik.pedersen@gmail.com"
 
 ENV HUGORELEASER_VERSION=v0.60.0
 
 RUN mkdir -p /root/.ssh; \
-    chmod 0700 /root/.ssh; \
-    ssh-keyscan github.com > /root/.ssh/known_hosts;
+	chmod 0700 /root/.ssh; \
+	ssh-keyscan github.com > /root/.ssh/known_hosts;
 
 # Install tools
 RUN go install github.com/gohugoio/hugoreleaser@$HUGORELEASER_VERSION
 
 
 RUN apt-get update && \
-    apt-get install -y automake autogen \
-    libtool libxml2-dev uuid-dev libssl-dev bash \
-    patch cmake make tar xz-utils bzip2 gzip zlib1g-dev sed cpio \
-    gcc-multilib g++-multilib gcc-mingw-w64 g++-mingw-w64 clang llvm-dev --no-install-recommends || exit 1; \
-    rm -rf /var/lib/apt/lists/*;
+	apt-get install -y automake autogen \
+	libtool libxml2-dev uuid-dev libssl-dev bash \
+	patch cmake make tar xz-utils bzip2 gzip zlib1g-dev sed cpio \
+	gcc-multilib g++-multilib gcc-mingw-w64 g++-mingw-w64 clang llvm-dev --no-install-recommends || exit 1; \
+	rm -rf /var/lib/apt/lists/*;
 
 # Cross compile setup
 ENV OSX_SDK_VERSION=12.3
@@ -28,11 +28,11 @@ ENV OSX_SDK_PATH=/$OSX_SDK.tar.gz
 COPY $OSX_SDK.tar.gz /go
 
 RUN git clone https://github.com/tpoechtrager/osxcross.git && \
-    git -C osxcross checkout f873f534c6cdb0776e457af8c7513da1e02abe59 || exit 1; \
-    mv $OSX_SDK.tar.gz osxcross/tarballs/ && \
-    UNATTENDED=yes SDK_VERSION=${OSX_SDK_VERSION} OSX_VERSION_MIN=10.10 osxcross/build.sh || exit 1; \
-    mv osxcross/target $OSX_NDK_X86; \
-    rm -rf osxcross;
+	git -C osxcross checkout f873f534c6cdb0776e457af8c7513da1e02abe59 || exit 1; \
+	mv $OSX_SDK.tar.gz osxcross/tarballs/ && \
+	UNATTENDED=yes SDK_VERSION=${OSX_SDK_VERSION} OSX_VERSION_MIN=10.10 osxcross/build.sh || exit 1; \
+	mv osxcross/target $OSX_NDK_X86; \
+	rm -rf osxcross;
 
 ENV PATH=$OSX_NDK_X86/bin:$PATH
 ENV LD_LIBRARY_PATH=$OSX_NDK_X86/lib
